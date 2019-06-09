@@ -48,4 +48,4 @@ http://IP:port/methhod/*METHOD_NAME*?secret=*SECRET*&arg1=val1&arg2=val2&...&arg
 | argument |   value  | description |
 |:--------:|:--------:|:-----------:|
 |  format  |  percent | in percents |
-|          | fraction | as fraction |
+|          | fraction | as decimal fraction |
