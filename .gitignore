@@ -1,6 +1,6 @@
 .*
 !.gitignore
 Makefile
-.pyc
+*.pyc
 __pycache__
 /server/venv/
