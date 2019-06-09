@@ -1,0 +1,51 @@
+{
+    "msg": [
+        {
+            "timestamp": 1560094780.305378,
+            "type": "command",
+            "command": "hello",
+            "console_response": "Unrecognized command \"hello\".\n"
+        },
+        {
+            "timestamp": 1560094797.916753,
+            "type": "command",
+            "command": "hello",
+            "console_response": "Unrecognized command \"hello\".\n"
+        },
+        {
+            "timestamp": 1560094807.17653,
+            "type": "command",
+            "command": "12345",
+            "console_response": "Unrecognized command \"12345\".\n"
+        },
+        {
+            "timestamp": 1560094942.97412,
+            "type": "command",
+            "command": "say hello",
+            "console_response": "Unrecognized command \"say\".\n"
+        },
+        {
+            "timestamp": 1560094953.817657,
+            "type": "command",
+            "command": "say hello",
+            "console_response": "Unrecognized command \"say\".\n"
+        },
+        {
+            "timestamp": 1560094964.680394,
+            "type": "command",
+            "command": "say hello to me, please",
+            "console_response": "Unrecognized command \"say\".\n"
+        },
+        {
+            "timestamp": 1560095634.683019,
+            "type": "command",
+            "command": "say hello to me, please",
+            "console_response": "Unrecognized command \"say\".\n"
+        },
+        {
+            "timestamp": 1560095635,
+            "type": "message",
+            "message": "just message to let Igor know that it's possible"
+        }
+    ]
+}
