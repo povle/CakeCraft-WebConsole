@@ -45,6 +45,7 @@ deactivate
 To call methods use:
 http://IP:port/methhod/*METHOD_NAME*?secret=*SECRET*&arg1=val1&arg2=val2&...&argN=valN, where *SECRET* is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+argN+valN+".")
 1. *get_ram_usage*: returns RAM usage. Arguments:
+
 | argument |   value  | description |
 |:--------:|:--------:|:-----------:|
 |  format  |  percent | in percents |
