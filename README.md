@@ -30,8 +30,9 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 - Simple(at first) html+js web-console.
 ## Completed(Server):
 - HTTP Python API server on Flask.
-  1. Created server with one html page.
-  2. Figured out how to get POST or GET data.
+  * Created server with one html page.
+  * Figured out how to get POST or GET data.
+  * Make simple HTTP-request system.
 ## Completed(Client):
 ...
 ## Comments:
@@ -68,7 +69,7 @@ http://IP:port/methhod/**METHOD_NAME**?secret=**SECRET**&arg1=val1&arg2=val2&...
 |  format  |  percent | in percents         |
 |          | fraction | as decimal fraction |
 
-* **rcon.exec_command**: executes command on the server. Arguments:
+* **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
