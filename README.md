@@ -33,6 +33,8 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
   * Created server with one html page.
   * Figured out how to get POST or GET data.
   * Make simple HTTP-request system.
+- API Base.
+  * Create API-request class.
 ## Completed(Client):
 ...
 ## Comments:
