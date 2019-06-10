@@ -73,32 +73,32 @@ where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+a
 ### **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
 
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | command | Command to execute |
 
 ### **rcon.get_history**: returns console history. Arguments:
 
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | count | Amount of lines to return, if 0 - <br/>whole history |
 | offset | Offset from last line, 0 by default |
 
 ### **backup.make**: makes a backup of the important files. Arguments:
 
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | name | Short description of backup, "" by <br/>default |
 | desc | Full desctiption of backup, "" by <br/>default |
 
 ### **backup.info**: returns info about backup by timestamp, or the beginning of name or full name . Arguments:
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | backup | Timestamp of when backup made, or <br/>the beginning of name or full name |
 
 ### **backup.list**: returns a list of backups. Arguments:
 
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | count | Amount of backups to return(from the newest <br/>one), if 0 - whole list of backups |
 | from | Timestamp down to which backups will be <br/>displayed, 0 by default, cannot be used with from_name |
 | to | Timestamp up to which backups will be <br/>displayed, current time by default, cannot be used with to_name |
@@ -109,5 +109,5 @@ where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+a
 ### **backup.switch_to**: saves current files to new backup, and then restore everything to past backup. **WARNING: stop the server before it.** Arguments:
 
 | argument | description |
-|:--------:|:-----------:|
+|:--------:|-------------|
 | backup | Timestamp of when backup made, or <br/>the beginning of name or full name |
