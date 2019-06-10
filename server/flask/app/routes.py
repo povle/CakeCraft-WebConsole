@@ -99,6 +99,7 @@ class API:
                     }
                 })
 
+        # FIXME
         class RCON:
             @app.route("/method/rcon.exec_command", methods=['GET', 'POST'])
             def exec_command():
@@ -110,9 +111,9 @@ class API:
                         }
                     })
                 command = request.args["command"]
+                # FIXME
                 # Temporary part to allow web-developer do his job:
                 console_response = "Unrecognized command \"" + command.split()[0] + "\".\n"
-                history = 0
                 with open(os.getcwd() + "/temp_console-history.json", "r") as f:
                     history = json.loads(f.read())
                 history["msg"].append({
@@ -134,8 +135,8 @@ class API:
             @app.route("/method/rcon.get_history", methods=['GET', 'POST'])
             def get_history():
 
+                # FIXME
                 # Temporary part to allow web-developer do his job:
-                history = 0
                 with open(os.getcwd() + "/temp_console-history.json", "r") as f:
                     history = json.loads(f.read())["msg"]
                 # End of temporary part
@@ -146,12 +147,35 @@ class API:
                     }
                 })
 
+        # FIXME
         class BackupManagement:
             @app.route("/method/backup.make", methods=['GET', 'POST'])
             def make():
 
-                return json.dumps(None)
+                # FIXME
+                if True:
+                    name = "backup_" + time.strftime("%H:%M:%S_%d.%m.%y", time.gmtime())
+                # FIXME
+                # Temporary part to allow web-developer do his job:
 
+                # End of temporary part
+                # FIXME
+                size = 0
+                #size = os.path.getsize(os.getcwd() + "/../backups/" + name + "/") # Size of archive
+                return json.dumps({
+                    "response":{
+                        "name": name,
+                        "hash": 0xFFFFFFFF,
+                        "path": "/server/backups/" + name + "/",
+                        "size": size
+                    }
+                })
+
+
+            @app.route("/method/backup.info", methods=['GET', 'POST'])
+            def info():
+
+                return json.dumps(None)
 
             @app.route("/method/backup.list", methods=['GET', 'POST'])
             def list():
