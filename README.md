@@ -46,8 +46,9 @@ cd server
 ```
 Ctrl+C to exit.
 ## API Methods:
-To call methods use:
-http://IP:port/methhod/**METHOD_NAME**?secret=**SECRET**&arg1=val1&arg2=val2&...&argN=valN, where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+argN+valN+".")
+To call methods use:<br/>
+http://IP:port/methhod/**METHOD_NAME**?secret=**SECRET**&arg1=val1&arg2=val2&...&argN=valN,<br/>
+where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+argN+valN+".")
 * **stats.get_ram_usage**: returns RAM usage. Arguments:
 
 | argument |   value  | description         |
