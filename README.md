@@ -39,14 +39,12 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 ...
 ## Comments:
 - To configure server use server/setup.sh (run in Server directory!).
-- To launch server use server/run.sh (run in Server directory!), Ctrl+C to exit.
-- Also you must run
+- To launch server type:
 ```bash
-source venv/bin/activate
-export FLASK_APP=main.py
-FLASK_ENV=production # or development
-deactivate
+cd server
+./run.sh development #or production
 ```
+Ctrl+C to exit.
 ## API Methods:
 To call methods use:
 http://IP:port/methhod/**METHOD_NAME**?secret=**SECRET**&arg1=val1&arg2=val2&...&argN=valN, where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+argN+valN+".")
