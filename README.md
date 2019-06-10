@@ -106,9 +106,10 @@ where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+a
 | to_name | Name up to which backups will be <br/>displayed, optional, cannot be used with to |
 
 
-### **backup.switch_to**: saves current files to new backup, and then restore everything to past backup.
-**WARNING: stop the server before it.** Arguments:
+### **backup.switch_to**: saves current files to new backup, and then restore everything to past backup. Arguments:
 
 | argument | description |
 |:--------:|-------------|
 | backup | Timestamp of when backup made, or <br/>the beginning of name or full name |
+
+**WARNING: stop the server before it.**
