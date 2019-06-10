@@ -49,48 +49,48 @@ Ctrl+C to exit.
 To call methods use:<br/>
 http://IP:port/method/**METHOD_NAME**?secret=**SECRET**&arg1=val1&arg2=val2&...&argN=valN,<br/>
 where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+argN+valN+".")
-* **stats.get_ram_usage**: returns RAM usage. Arguments:
+### **stats.get_ram_usage**: returns RAM usage. Arguments:
 
 | argument |   value  | description         |
 |:--------:|:--------:|:-------------------:|
 |  format  |  percent | in percents         |
 |          | fraction | as decimal fraction |
 
-* **stats.get_cpu_usage**: returns CPU usage. Arguments:
+### **stats.get_cpu_usage**: returns CPU usage. Arguments:
 
 | argument |   value  | description         |
 |:--------:|:--------:|:-------------------:|
 |  format  |  percent | in percents         |
 |          | fraction | as decimal fraction |
 
-* **stats.get_disk_usage**: return Disk usage. Arguments:
+### **stats.get_disk_usage**: return Disk usage. Arguments:
 
 | argument |   value  | description         |
 |:--------:|:--------:|:-------------------:|
 |  format  |  percent | in percents         |
 |          | fraction | as decimal fraction |
 
-* **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
+### **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
 | command | Command to execute |
 
-* **rcon.get_history**: returns console history. Arguments:
+### **rcon.get_history**: returns console history. Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
 | count | Amount of lines to return, if 0 - whole history |
 | offset | Offset from last line, 0 by default |
 
-* **backup.make**: makes a backup of the important files. Arguments:
+### **backup.make**: makes a backup of the important files. Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
 | name | Short description of backup, "" by default |
 | desc | Full desctiption of backup, "" by default |
 
-* **backup.list**: returns a list of backups. Arguments:
+### **backup.list**: returns a list of backups. Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
@@ -98,7 +98,7 @@ where **SECRET** is md5(secret_key+":"+arg1+"="+val1+","+arg2+"="+val2+","+...+a
 | from | Timestamp down to which backups will be showed, 0 by default |
 | to | Timestamp up to which backups will be displayed, current time by default |
 
-* **backup.switch_to**: saves current files to new backup, and then restore everything to past backup. **WARNING: stop the server before it.** Arguments:
+### **backup.switch_to**: saves current files to new backup, and then restore everything to past backup. **WARNING: stop the server before it.** Arguments:
 
 | argument | description |
 |:--------:|:-----------:|
