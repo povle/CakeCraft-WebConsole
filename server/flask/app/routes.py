@@ -51,7 +51,6 @@ class API:
                     }
                 })
 
-
             @app.route("/method/stats.get_cpu_usage", methods=['GET', 'POST'])
             def get_cpu_usage():
 
@@ -76,7 +75,6 @@ class API:
                     }
                 })
 
-
             @app.route("/method/stats.get_disk_usage", methods=['GET', 'POST'])
             def get_disk_usage():
 
@@ -100,9 +98,6 @@ class API:
                         "format": format
                     }
                 })
-
-
-
 
         class RCON:
             @app.route("/method/rcon.exec_command", methods=['GET', 'POST'])
@@ -150,9 +145,6 @@ class API:
                         "history":history
                     }
                 })
-
-
-
 
         class BackupManagement:
             @app.route("/method/backup.make", methods=['GET', 'POST'])
