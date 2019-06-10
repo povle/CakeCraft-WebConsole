@@ -4,3 +4,4 @@ Makefile
 *.pyc
 __pycache__
 /server/venv/
+/server/minecraft/
