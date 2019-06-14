@@ -5,3 +5,4 @@ python3 -m venv venv
 source venv/bin/activate
 sudo apt install python3-flask
 deactivate
+mkdir flask/logs
