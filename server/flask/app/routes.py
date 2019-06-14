@@ -1,5 +1,5 @@
 #!python3
-from app import app
+from app import app, log
 from flask import request
 import os, json, time
 
@@ -7,15 +7,10 @@ import os, json, time
 @app.route('/')
 @app.route('/index')
 def index():
-    f = open(os.getcwd() + "/app/index.html")
+    f = open("/app/index.html")
     page = f.read()
     f.close()
     return page
-
-
-@app.route('/method/test', methods=['GET', 'POST'])
-def test_method():
-    return "Hello, world!<br/>Also hi, " + request.args["user.name"] + "!"
 
 @app.route("/method/new")
 def new_method():
@@ -24,24 +19,70 @@ def new_method():
         r += str(i) + "\t" + str(i*i) + "<br/>"
     return r
 """
+
+def check_secret(secret):
+    if secret == app.config["SECRET_KEY"]:
+        return True # Secret is right
+    return False # Somebody is trying to hack us! :(
+
 class API:
+    @app.route('/method/test', methods=['GET', 'POST'])
+    def test_method():
+        if "secret" not in request.args:
+            log.write("/method/test: access denied, expected secret")
+            return json.dumps({
+                "bad_response": {
+                    "error": "access denied, expected secret"
+                }
+            })
+        if not check_secret(request.args["secret"]):
+            log.write("/method/test: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+            return json.dumps({
+                "bad_response": {
+                    "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                }
+            })
+        log.write("/method/test: is working fine")
+        return json.dumps({
+            "response":{
+                "message": "working fine"
+            }
+        })
+
     class Method:
         class Statistics:
             @app.route("/method/stats.get_ram_usage", methods=['GET', 'POST'])
             def get_ram_usage():
 
+                if "secret" not in request.args:
+                    log.write("/method/stats.get_ram_usage: access denied, expected secret")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/stats.get_ram_usage: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
                 if "format" not in request.args:
                     format = "fraction"
                 elif request.args["format"] not in ["percent", "fraction"]:
+                    log.write("/method/stats.get_ram_usage: wrong format value")
                     return json.dumps({
                         "bad_response":{
-                            "error": "wrong format argument in GET/POST args, expected \"percent\" or \"fraction\""
+                            "error": "wrong format value, expected \"percent\" or \"fraction\""
                         }
                     })
                 else:
                     format = request.args["format"]
 
+                # FIXME
                 result = 62.3
+                log.write("/method/stats.get_ram_usage: successful request, ram usage equal to " + result + "%")
                 if format == "fraction":
                     result /= 100 # 62.3% == 0.623
                 return json.dumps({
@@ -54,18 +95,35 @@ class API:
             @app.route("/method/stats.get_cpu_usage", methods=['GET', 'POST'])
             def get_cpu_usage():
 
+                if "secret" not in request.args:
+                    log.write("/method/stats.get_cpu_usage: access denied, expected secret")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/stats.get_cpu_usage: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
                 if "format" not in request.args:
                     format = "fraction"
                 elif request.args["format"] not in ["percent", "fraction"]:
+                    log.write("/method/stats.get_cpu_usage: wrong format value")
                     return json.dumps({
                         "bad_response":{
-                            "error": "wrong format argument in GET/POST args, expected \"percent\" or \"fraction\""
+                            "error": "wrong format value, expected \"percent\" or \"fraction\""
                         }
                     })
                 else:
                     format = request.args["format"]
 
+                # FIXME
                 result = 56.3
+                log.write("/method/stats.get_cpu_usage: successful request, cpu usage equal to " + result + "%")
                 if format == "fraction":
                     result /= 100
                 return json.dumps({
@@ -78,18 +136,35 @@ class API:
             @app.route("/method/stats.get_disk_usage", methods=['GET', 'POST'])
             def get_disk_usage():
 
+                if "secret" not in request.args:
+                    log.write("/method/stats.get_disk_usage: access denied, expected secret")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/stats.get_disk_usage: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
                 if "format" not in request.args:
                     format = "fraction"
                 elif request.args["format"] not in ["percent", "fraction"]:
+                    log.write("/method/stats.get_disk_usage: wrong format value")
                     return json.dumps({
                         "bad_response":{
-                            "error": "wrong format argument in GET/POST args, expected \"percent\" or \"fraction\""
+                            "error": "wrong format value, expected \"percent\" or \"fraction\""
                         }
                     })
                 else:
                     format = request.args["format"]
 
-                result = 82.1
+                # FIXME
+                result = 72.3
+                log.write("/method/stats.get_disk_usage: successful request, disk usage equal to " + result + "%")
                 if format == "fraction":
                     result /= 100
                 return json.dumps({
@@ -104,17 +179,32 @@ class API:
             @app.route("/method/rcon.exec_command", methods=['GET', 'POST'])
             def exec_command():
 
-                if "command" not in request.args or request.args["command"] == "":
+                if "secret" not in request.args:
+                    log.write("/method/rcon.exec_command: access denied, expected secret")
                     return json.dumps({
                         "bad_response":{
-                            "error": "expected command argument in GET/POST args"
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/rcon.exec_command: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
+                if "command" not in request.args or request.args["command"] == "":
+                    log.write("/method/rcon.exec_command: expected command")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "expected command"
                         }
                     })
                 command = request.args["command"]
                 # FIXME
                 # Temporary part to allow web-developer do his job:
                 console_response = "Unrecognized command \"" + command.split()[0] + "\".\n"
-                with open(os.getcwd() + "/temp_console-history.json", "r") as f:
+                with open("temp_console-history.json", "r") as f:
                     history = json.loads(f.read())
                 history["msg"].append({
                     "type":"command",
@@ -122,9 +212,10 @@ class API:
                     "command":command,
                     "console_response":console_response
                 })
-                with open(os.getcwd() + "/temp_console-history.json", "w") as f:
+                with open("temp_console-history.json", "w") as f:
                     json.dump(history, f, indent=4)
                 # End of temporary part
+                log.write("/method/rcon.exec_command: successful request, successful command execution")
                 return json.dumps({
                     "response":{
                         "command": command,
@@ -132,15 +223,31 @@ class API:
                     }
                 })
 
+            # FIXME
             @app.route("/method/rcon.get_history", methods=['GET', 'POST'])
             def get_history():
 
+                if "secret" not in request.args:
+                    log.write("/method/rcon.get_history: access denied, expected secret")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/rcon.get_history: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
                 # FIXME
                 # Temporary part to allow web-developer do his job:
-                with open(os.getcwd() + "/temp_console-history.json", "r") as f:
+                with open("temp_console-history.json", "r") as f:
                     history = json.loads(f.read())["msg"]
                 # End of temporary part
                 history.sort(key=lambda x: x["timestamp"])
+                log.write("/method/rcon.get_history: successful request")
                 return json.dumps({
                     "response":{
                         "history":history
@@ -151,39 +258,36 @@ class API:
         class BackupManagement:
             @app.route("/method/backup.make", methods=['GET', 'POST'])
             def make():
-
-                # FIXME
-                if True:
-                    name = "backup_" + time.strftime("%H:%M:%S_%d.%m.%y", time.gmtime())
-                # FIXME
-                # Temporary part to allow web-developer do his job:
-
-                # End of temporary part
-                # FIXME
-                size = 0
-                #size = os.path.getsize(os.getcwd() + "/../backups/" + name + "/") # Size of archive
+                log.write("/method/backup.make: API method does not work, W.I.P.")
                 return json.dumps({
-                    "response":{
-                        "name": name,
-                        "hash": 0xFFFFFFFF,
-                        "path": "/server/backups/" + name + "/",
-                        "size": size
+                    "bad_response":{
+                        "error": "API method W.I.P."
                     }
                 })
 
-
             @app.route("/method/backup.info", methods=['GET', 'POST'])
             def info():
-
-                return json.dumps(None)
+                log.write("/method/backup.make: API method does not work, W.I.P.")
+                return json.dumps({
+                    "bad_response":{
+                        "error": "API method W.I.P."
+                    }
+                })
 
             @app.route("/method/backup.list", methods=['GET', 'POST'])
             def list():
-
-                return json.dumps(None)
-
+                log.write("/method/backup.make: API method does not work, W.I.P.")
+                return json.dumps({
+                    "bad_response":{
+                        "error": "API method W.I.P."
+                    }
+                })
 
             @app.route("/method/backup.switch_to", methods=['GET', 'POST'])
             def switch_to():
-
-                return json.dumps(None)
+                log.write("/method/backup.make: API method does not work, W.I.P.")
+                return json.dumps({
+                    "bad_response":{
+                        "error": "API method W.I.P."
+                    }
+                })
