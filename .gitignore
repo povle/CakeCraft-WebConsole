@@ -6,3 +6,4 @@ __pycache__
 /server/venv/
 /server/minecraft/
 /server/flask/config.json
+/server/flask/logs
