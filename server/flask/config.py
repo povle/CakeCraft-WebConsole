@@ -1,4 +1,4 @@
-import os, json, hashlib, random
+import os, json, hashlib, random, time
 
 random.seed()
 
@@ -35,3 +35,4 @@ print(config_file.config)
 
 class Config(object):
     SECRET_KEY = config_file.get("secret_key")
+    LOG_FILE = time.strftime("logs/%d.%m.%y.log", time.gmtime())
