@@ -59,7 +59,7 @@ Ctrl+C to exit.
 
 ## API Methods:
 To call methods use:
-http://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2&...&argN=valN
+https://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2&...&argN=valN
 
 ### **stats.get_ram_usage**: returns RAM usage. Arguments:
 
