@@ -2,7 +2,7 @@
 Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 
 ## Goals to complete(Server):
-- HTTP Python API server on Flask.
+- HTTP Python API server on Flask. (COMPLETED)
   * Create server with one html page.
   * Figure out how to get POST or GET data.
   * Make simple HTTP-request system.
@@ -35,11 +35,12 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 
 ## Completed(Server):
 - HTTP Python API server on Flask.
-  * Created server with one html page.
-  * Figured out how to get POST or GET data.
-  * Make simple HTTP-request system.
+  * Created server with one html page. (9.06)
+  * Figured out how to get POST or GET data. (9.06)
+  * Make simple HTTP-request system. (9.06)
+  * Create secret key protection. (14.06)
 - API Base.
-  * Create API-request class.
+  * Create API-request class. (9.06)
 
 ## Completed(Client):
 ...
