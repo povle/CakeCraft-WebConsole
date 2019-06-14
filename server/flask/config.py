@@ -1,4 +1,37 @@
-import os
+import os, json, hashlib, random
+
+random.seed()
+
+class ConfigFile:
+    def __init__(self):
+        try:
+            config_file = open("config.json", "r")
+            self.config = json.load(config_file)
+            config_file.close()
+        except IOError:
+            config_file = open("config.json", "w")
+
+            # config by default
+            secret = hashlib.sha1()
+            secret.update(str(random.randint(1000000, 999999999)))
+            self.config = {
+                "secret_key": secret.hexdigest().upper(),
+            }
+            json.dump(self.config, config_file)
+
+            config_file.close()
+        except:
+            raise
+    def get(self, key):
+        if key not in self.config:
+            return ""
+        try:
+            return str(self.config[key])
+        except:
+            raise
+
+config_file = ConfigFile()
+print(config_file.config)
 
 class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or "Foom5eDahl0ya5neiqu8aip6aikoeZoo"
+    SECRET_KEY = config_file.get("secret_key")
