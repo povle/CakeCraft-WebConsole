@@ -45,14 +45,22 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 ## Completed(Client):
 ...
 
-## Comments:
-- To configure server use server/setup.sh (run in Server directory!).
-- To launch server type:
+## Setting up:
+- At first, configure server:
 ```bash
 cd server
-./run.sh development #or production
+./setup.sh
 ```
+
+- Second thing second, each time you launch server:
+```bash
+cd server
+./run.sh dev # other options: development, production, prod
+```
+
 Ctrl+C to exit.
+
+- At last, if you want to get secret key browse in server/flask/config.json
 
 ## TODO:
 - Exception handlers.
