@@ -5,3 +5,4 @@ Makefile
 __pycache__
 /server/venv/
 /server/minecraft/
+/server/flask/config.json
