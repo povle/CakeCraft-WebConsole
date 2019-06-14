@@ -204,16 +204,26 @@ class API:
                 # FIXME
                 # Temporary part to allow web-developer do his job:
                 console_response = "Unrecognized command \"" + command.split()[0] + "\".\n"
-                with open("temp_console-history.json", "r") as f:
-                    history = json.loads(f.read())
+                try:
+                    console_history = open("temp_console_history.json", "r")
+                    history = json.load(console_history)
+                    console_history.close()
+                except IOError:
+                    history = {"msg":[]}
+                except:
+                    raise
                 history["msg"].append({
                     "type":"command",
                     "timestamp": time.time(),
                     "command":command,
                     "console_response":console_response
                 })
-                with open("temp_console-history.json", "w") as f:
-                    json.dump(history, f, indent=4)
+                try:
+                    console_history = open("temp_console_history.json", "w")
+                    json.dump(history, console_history, indent=4)
+                    console_history.close()
+                except:
+                    raise
                 # End of temporary part
                 log.write("/method/rcon.exec_command: successful request, successful command execution")
                 return json.dumps({
@@ -243,14 +253,20 @@ class API:
                     })
                 # FIXME
                 # Temporary part to allow web-developer do his job:
-                with open("temp_console-history.json", "r") as f:
-                    history = json.loads(f.read())["msg"]
+                try:
+                    console_history = open("temp_console_history.json", "r")
+                    history = json.load(console_history)["msg"]
+                    console_history.close()
+                except IOError:
+                    history = {"msg":[]}
+                except:
+                    raise
                 # End of temporary part
                 history.sort(key=lambda x: x["timestamp"])
                 log.write("/method/rcon.get_history: successful request")
                 return json.dumps({
                     "response":{
-                        "history":history
+                        "history": history
                     }
                 })
 

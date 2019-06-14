@@ -62,9 +62,6 @@ Ctrl+C to exit.
 
 - At last, if you want to get secret key browse in server/flask/config.json
 
-## TODO:
-- Exception handlers.
-
 ## API Methods:
 To call methods use:
 https://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2&...&argN=valN
