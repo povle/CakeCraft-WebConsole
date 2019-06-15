@@ -1,13 +1,20 @@
+# Cache, temporary files, binaries and other trash:
 .*
 *.so
-*.cmake
 *.pyc
 !.gitignore
 Makefile
 __pycache__
-/server/flask/venv/
+
+# Minecraft server is almost only binaries:
 /server/minecraft/
-/server/flask/config.json
+
+# User-data files and virtual environment which contains almost only binaries:
 /server/flask/logs
+/server/flask/venv
+/server/flask/config.json
+
+# CMake cache files
 /server/cpp/CMakeFiles/
 /server/cpp/CMakeCache.txt
+*.cmake
