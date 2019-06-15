@@ -3,15 +3,15 @@ cd flask
 mkdir logs
 
 # We are going to need this
-sudo apt install python3
-python3 -V
+sudo apt install python3.7-dev python3.7
+python3.7 -V
 
 # Setting up virtual environment
 
 sudo apt install python3-venv
-python3 -m venv venv
+python3.7 -m venv venv
 source venv/bin/activate
 sudo apt install python3-pip
 pip3 install Flask
-python3 -m flask --version
+python3.7 -m flask --version
 deactivate
