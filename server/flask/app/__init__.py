@@ -1,4 +1,4 @@
-#!python3
+#!python3.7
 from flask import Flask
 from config import Config
 

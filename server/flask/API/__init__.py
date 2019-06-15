@@ -1,4 +1,4 @@
-#!python
+#!python3.7
 from API import api_cpp
 
 def greet():

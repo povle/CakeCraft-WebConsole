@@ -1,3 +1,4 @@
+#!python3.7
 import os, json, hashlib, random, time
 
 random.seed()
