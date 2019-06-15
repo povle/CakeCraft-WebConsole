@@ -8,7 +8,7 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
   * Make simple HTTP-request system.
   * Create secret key protection.
 - API Base.
-  * Create API-request class.
+  * Create API-request class. (COMPLETED)
   * Make simple API-method using C++(boost/python.hpp) + Python.
 - Backups.
   * Make auto-backup system.
@@ -41,6 +41,7 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
   * Create secret key protection. (14.06)
 - API Base.
   * Create API-request class. (9.06)
+  * Make simple API-method using C++(boost/python.hpp) + Python. (15.06)
 
 ## Completed(Client):
 ...
@@ -87,6 +88,8 @@ https://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2
 |  1|  format  |  percent | in percents         |
 |   |          | fraction | as decimal fraction |
 
+
+
 ### **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
 
 | # | argument | description |
@@ -100,6 +103,8 @@ https://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2
 |  1| count | Amount of lines to return, if 0 - whole history |
 |  2| offset | Offset from last line, 0 by default |
 
+
+
 ### **backup.make**: makes a backup of the important files. Arguments:
 
 | # | argument | description |
@@ -110,23 +115,24 @@ https://IP:port/method/**METHOD_NAME**?secret=**SECRET_KEY**&arg1=val1&arg2=val2
 ### **backup.info**: returns info about backup by timestamp, or the beginning of name or full name . Arguments:
 | # | argument | description |
 |--:|:--------:|-------------|
-|  1| backup | Timestamp of when backup made, or the beginning of name or full name of backup |
+|  1| backup | Timestamp of backup, cannot be used with *backup_name* |
+|  2| backup_name | The beginning of name or full name of backup, cannot be used with *backup* |
 
 ### **backup.list**: returns a list of backups. Arguments:
 
 | # | argument | description |
 |--:|:--------:|-------------|
 |  1| count | Amount of backups to return(from the newest one), if 0 - whole list of backups |
-|  2| from | Timestamp down to which backups will be displayed, 0 by default, cannot be used with from_name |
-|  3| to | Timestamp up to which backups will be displayed, current time by default, cannot be used with to_name |
-|  4| from_name | The beginning of name or full name down to which backups will be displayed, optional, cannot be used with from |
-|  5| to_name | The beginning of name or full name up to which backups will be displayed, optional, cannot be used with to |
-
+|  2| from | Timestamp down to which backups will be displayed, 0 by default, cannot be used with *from_name* |
+|  3| to | Timestamp up to which backups will be displayed, current time by default, cannot be used with *to_name* |
+|  4| from_name | The beginning of name or full name down to which backups will be displayed, optional, cannot be used with *from* |
+|  5| to_name | The beginning of name or full name up to which backups will be displayed, optional, cannot be used with *to* |
 
 ### **backup.switch_to**: saves current files to new backup, and then restore everything to past backup. Arguments:
 
 | # | argument | description |
 |--:|:--------:|-------------|
-|  1| backup | Timestamp of when backup made, or the beginning of name or full name of backup |
+|  1| backup | Timestamp of backup, cannot be used with *backup_name* |
+|  2| backup_name | The beginning of name or full name of backup, cannot be used with *backup* |
 
 **WARNING: stop the server before it.**
