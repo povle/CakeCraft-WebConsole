@@ -7,3 +7,6 @@ __pycache__
 /server/minecraft/
 /server/flask/config.json
 /server/flask/logs
+/server/cpp/CMakeFiles/
+/server/cpp/CMakeCache.txt
+/server/cpp/cmake_install.cmake
