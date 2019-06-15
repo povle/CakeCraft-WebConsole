@@ -1,7 +1,8 @@
-#!python3
+#!python3.7
 from app import app, log
 from flask import request
 import os, json, time
+import API as api_cpp
 
 """
 @app.route('/')
@@ -45,12 +46,12 @@ class API:
         log.write("/method/test: is working fine")
         return json.dumps({
             "response":{
-                "message": "working fine"
+                "message": "working fine, {}".format(api_cpp.stats.get_ram_usage())
             }
         })
 
     class Method:
-        class Statistics:
+        class Stats:
             @app.route("/method/stats.get_ram_usage", methods=['GET', 'POST'])
             def get_ram_usage():
 
