@@ -1,7 +1,6 @@
 #!/usr/bin/bash
-source venv/bin/activate
 cd flask
-
+source venv/bin/activate
 if [ "$1" == "development" ] || [ "$1" == "production" ]; then
     export FLASK_ENV=$1
     postfix=""
@@ -21,6 +20,6 @@ echo " - FLASK_ENV is set to \"$FLASK_ENV\" $postfix"
 echo
 export FLASK_APP=main.py
 
-flask run
+python3 main.py
 cd ..
 deactivate
