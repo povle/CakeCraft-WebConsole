@@ -12,7 +12,7 @@ __pycache__
 # User-data files and virtual environment which contains almost only binaries:
 /server/flask/logs
 /server/flask/venv
-/server/flask/config.json
+/server/flask/app/config.json
 
 # CMake cache files
 /server/cpp/CMakeFiles/
