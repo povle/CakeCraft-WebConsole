@@ -2,7 +2,7 @@
 
 # C++:
 cd cpp
-sudo apt install g++ make cmake
+sudo apt install g++ make cmake libboost-all-dev
 cmake .
 make
 cd ..
