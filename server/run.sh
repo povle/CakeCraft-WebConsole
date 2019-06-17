@@ -20,6 +20,6 @@ echo " - FLASK_ENV is set to \"$FLASK_ENV\" $postfix"
 echo
 export FLASK_APP=main.py
 
-python3 main.py
+flask run
 cd ..
 deactivate
