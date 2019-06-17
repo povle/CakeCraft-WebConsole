@@ -1,4 +1,13 @@
 #!/usr/bin/bash
+
+# C++:
+cd cpp
+sudo apt install g++ make cmake
+cmake .
+make
+cd ..
+
+# Python:
 cd flask
 mkdir logs
 
