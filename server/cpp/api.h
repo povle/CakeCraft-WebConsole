@@ -1,11 +1,25 @@
+#include <sys/statvfs.h>
+#include <sys/types.h>
+#include <sys/sysinfo.h>
+
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+
+#include <iostream>
 #include <string>
+
 
 namespace AJ{
     class API{
     public:
         static char const* greet();
         class Stats{
+            static unsigned long long last_total_user, last_total_user_low, last_total_sys, last_total_idle;
+            static struct sysinfo mem_info;
+            static struct statvfs buffer;
         public:
+            Stats();
             float get_ram_usage();
             float get_cpu_usage();
             float get_disk_usage();
