@@ -1,0 +1,102 @@
+﻿<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cakecraft Server Panel v1.a</title>
+	<link rel="stylesheet" href="css/foundation.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<!--TOP-MENU-->
+	<div class="top-bar">
+		<div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+				<li class="menu-text">Cakecraft Season 2</li>
+				<li><a href="#">Server Stats</a></li>
+				<li><a href="#">Console</a></li>
+			</ul>
+		</div>
+		<div class="top-bar-right">
+			<ul class="menu">
+				<li><a href="#">Authorize</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+	<div class="grid-x">
+		<div class="cell medium-8 large-6 medium-offset-2 large-offset-3">
+			<div class="callout large">
+				<div class="grid-x grid-margin-x">
+					<div class="cell small-10">
+						<h2>Cakecraft Server Panel</h2>
+						</div>
+
+					<div class="cell small-1">
+						<span class="label primary">v1.a</span>
+					</div>
+				</div>
+				
+				<div style="margin-bottom:20px"></div>
+				<button type="button" class="success button" name="serverStart">Server Start</button>
+				<button type="button" class="alert button" name="serverStop">Server Stop</button>
+				<h4>System stats:</h4>
+				<div style="margin-bottom:20px"></div>
+
+				<!--PROGRESS BARS-->
+				<h6 name="cpuLabel">CPU (25%)</h6>
+				<div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-meter" name="cpuProgress" style="width: 25%"></div>
+				</div>
+
+				<h6 name="ramLabel">RAM (60%)</h6>
+				<div class="warning progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-meter" name="ramProgress" style="width: 60%"></div>
+				</div>
+
+				<h6 name="discLabel">Disk space used (2%)</h6>
+				<div class="success progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-meter" name="diskProgress" style="width: 2%"></div>
+				</div>
+				<div style="margin-bottom:30px"></div>
+				<button type="button" class="button" name="statsRefresh">Refresh stats</button>
+				<div style="margin-bottom:30px"></div>
+
+
+				<h4>System Stats Auto-Refresh</h4>
+				<div style="margin-bottom:30px"></div>
+				<h6>Enable Auto-refresh</h6>
+				<div class="switch large">
+					<input class="switch-input" id="yes-no" type="checkbox" name="autoRefreshEnabled">
+					<label class="switch-paddle" for="yes-no">
+						<span class="switch-active" aria-hidden="true">Yes</span>
+						<span class="switch-inactive" aria-hidden="true">No</span>
+					</label>
+				</div>
+
+				<h6>Auto-refresh update rate (ms)</h6>
+				<div class="grid-x grid-margin-x">
+					<div class="cell small-4">
+						<input type="number" id="sliderOutput1" name="autoRefreshRate" disabled>
+					</div>
+
+					<div class="cell small-8">
+						<div class="slider disabled" data-slider data-initial-start="1500" data-step="50" data-start="1500" data-end="5000" name="autoRefreshRateSlider">
+							<span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput1"></span>
+							<span class="slider-fill" data-slider-fill></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	</div>
+	</div>
+
+	<script src="js/vendor/jquery.js"></script>
+	<script src="js/vendor/what-input.js"></script>
+	<script src="js/vendor/foundation.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
