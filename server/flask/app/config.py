@@ -9,20 +9,19 @@ class ConfigFile:
             config_file = open("config.json", "r")
             self.config = json.load(config_file)
             config_file.close()
-        except IOError:
+        except:
             config_file = open("config.json", "w")
 
             # config by default
             secret = hashlib.sha1()
-            secret.update(str(random.randint(1000000, 999999999)))
+            secret.update(str(random.randint(1000000, 999999999)).encode())
             self.config = {
                 "secret_key": secret.hexdigest().upper(),
             }
             json.dump(self.config, config_file)
 
             config_file.close()
-        except:
-            raise
+            
     def get(self, key):
         if key not in self.config:
             return ""

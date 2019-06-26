@@ -46,7 +46,7 @@ class API:
         log.write("/method/test: is working fine")
         return json.dumps({
             "response":{
-                "message": "working fine, {}".format(api_cpp.stats.get_ram_usage())
+                "message": "working fine"
             }
         })
 
@@ -81,9 +81,8 @@ class API:
                 else:
                     format = request.args["format"]
 
-                # FIXME
-                result = 62.3
-                log.write("/method/stats.get_ram_usage: successful request, ram usage equal to " + result + "%")
+                result = api_cpp.stats.get_ram_usage()
+                log.write("/method/stats.get_ram_usage: successful request, ram usage equal to " + str(result) + "%")
                 if format == "fraction":
                     result /= 100 # 62.3% == 0.623
                 return json.dumps({
@@ -122,14 +121,13 @@ class API:
                 else:
                     format = request.args["format"]
 
-                # FIXME
-                result = 56.3
-                log.write("/method/stats.get_cpu_usage: successful request, cpu usage equal to " + result + "%")
+                result = api_cpp.stats.get_cpu_usage()
+                log.write("/method/stats.get_cpu_usage: successful request, cpu usage equal to " + str(result) + "%")
                 if format == "fraction":
                     result /= 100
                 return json.dumps({
                     "response":{
-                        "ram_usage": result,
+                        "cpu_usage": result,
                         "format": format
                     }
                 })
@@ -163,14 +161,13 @@ class API:
                 else:
                     format = request.args["format"]
 
-                # FIXME
-                result = 72.3
-                log.write("/method/stats.get_disk_usage: successful request, disk usage equal to " + result + "%")
+                result = api_cpp.stats.get_disk_usage()
+                log.write("/method/stats.get_disk_usage: successful request, disk usage equal to " + str(result) + "%")
                 if format == "fraction":
                     result /= 100
                 return json.dumps({
                     "response":{
-                        "ram_usage": result,
+                        "disk_usage": result,
                         "format": format
                     }
                 })
