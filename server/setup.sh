@@ -1,5 +1,11 @@
 #!/usr/bin/bash
 
+# Git submodules:
+cd ..
+git submodule init
+git submodule update
+cd server
+
 # C++:
 cd cpp
 sudo apt install g++ make cmake libboost-all-dev
