@@ -3,66 +3,59 @@
 namespace AJ{
     struct sysinfo API::Stats::mem_info{};
     struct statvfs API::Stats::buffer{};
-    unsigned long long API::Stats::last_total_user;
-    unsigned long long API::Stats::last_total_user_low;
-    unsigned long long API::Stats::last_total_sys;
-    unsigned long long API::Stats::last_total_idle;
+    unsigned long long API::Stats::ram_total;
+    unsigned long long API::Stats::ram_free;
+    unsigned long long API::Stats::ram_available;
 
     char const* API::greet(){
        return "Hello, world!";
     }
     API::Stats::Stats(){
+
+    }
+
+    std::vector<unsigned long long> API::Stats::get_cpu_data(){
+        std::vector<unsigned long long> data(10, 0);
         FILE* file = fopen("/proc/stat", "r");
-        fscanf(file, "cpu %llu %llu %llu %llu", &last_total_user, &last_total_user_low, &last_total_sys, &last_total_idle);
-        fclose(file);
+        fscanf(file, "cpu ");
+        for(auto& i: data)
+            fscanf(file, "%llu", &i);
+        return data;
     }
 
     float API::Stats::get_ram_usage(){
-        int err = sysinfo (&mem_info);
+        FILE* file = fopen("/proc/meminfo", "r");
+        fscanf(file, "MemTotal:\t%llu kB\nMemFree:\t%llu kB\nMemAvailable:\t%llu", &ram_total, &ram_free, &ram_available);
+        printf("MemTotal:\t%llu\nMemFree:\t%llu\nMemAvailable:\t%llu\n", ram_total, ram_free, ram_available);
         float result;
-        if(!err){
-            result = (float)(mem_info.totalram - mem_info.freeram) / (float)mem_info.totalram * (float)100;
+        if(!fclose(file)){
+            result = (long double)(ram_total - ram_available) / (long double)ram_total * (long double)100;
         }else{
             result = -1;
         }
-        std::cout << "totalram\toccupied\tfree\tshared\t\tbuf/temp\n";
-        std::cout << mem_info.totalram / 1024 / 1024 << "\t\t";
-        std::cout << (mem_info.totalram - mem_info.freeram) / 1024 / 1024 << "\t\t";
-        std::cout << mem_info.freeram / 1024 / 1024 << "\t";
-        std::cout << mem_info.sharedram / 1024 / 1024 << "\t\t";
-        std::cout << mem_info.bufferram / 1024 / 1024 << "\t\t";
-        std::system("free -m");
         return result;
     }
     float API::Stats::get_cpu_usage(){
-        unsigned long long total_user, total_user_low, total_sys, total_idle;
-        FILE* file = fopen("/proc/stat", "r");
-        fscanf(file, "cpu %llu %llu %llu %llu", &total_user, &total_user_low, &total_sys, &total_idle);
-        int err = fclose(file);
-        float result;
-        if(!err){
-            if(total_user < last_total_user || total_user_low < last_total_user_low || total_sys < last_total_sys || total_idle < last_total_idle){
-                result = -2;
-            }else{
-                unsigned long long temp = (total_user - last_total_user_low) + (total_user_low - last_total_user_low) + (total_sys - last_total_sys);
-                result = (long double)temp / (long double)(temp + (total_idle - last_total_idle)) * (long double)100;
-            }
-        }else{
-            result = -1;
+        std::vector<unsigned long long> cpu_data = std::move(get_cpu_data());
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        std::vector<unsigned long long> new_cpu_data = std::move(get_cpu_data());
+        unsigned long long total_time = 0, idle_time = 0;
+        float result = 0;
+
+        for(std::size_t i = 0; i < 10; i++){
+            total_time += new_cpu_data[i] - cpu_data[i];
         }
-
-        last_total_user = total_user;
-        last_total_user_low = total_user_low;
-        last_total_sys = total_sys;
-        last_total_idle = total_idle;
-
+        for(std::size_t i = 3; i < 5; i++){
+            idle_time += new_cpu_data[i] - cpu_data[i];
+        }
+        result = (long double)(total_time - idle_time) / (long double)(total_time) * (long double)100;
+        cpu_data = std::move(new_cpu_data);
         return result;
     }
     float API::Stats::get_disk_usage(){
-        int err = statvfs("/", &buffer);
         float result;
-        if (!err) {
-            result = ((float)(buffer.f_blocks - buffer.f_bfree) / (float)buffer.f_blocks) * (float)100;
+        if (!statvfs("/", &buffer)) {
+            result = ((long double)(buffer.f_blocks - buffer.f_bfree) / (long double)buffer.f_blocks) * (long double)100;
         }else{
             result = -1;
         }

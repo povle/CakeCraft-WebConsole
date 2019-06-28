@@ -6,18 +6,24 @@
 #include <cstdio>
 #include <cstring>
 
+#include <chrono>
+#include <thread>
+
 #include <iostream>
 #include <string>
-
+#include <vector>
+#include <algorithm>
 
 namespace AJ{
     class API{
     public:
         static char const* greet();
         class Stats{
-            static unsigned long long last_total_user, last_total_user_low, last_total_sys, last_total_idle;
+            static unsigned long long ram_total, ram_free, ram_available;
             static struct sysinfo mem_info;
             static struct statvfs buffer;
+        private:
+            static std::vector<unsigned long long> get_cpu_data();
         public:
             Stats();
             float get_ram_usage();

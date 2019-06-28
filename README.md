@@ -42,7 +42,12 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 - API Base.
   * Create API-request class. (9.06)
   * Make simple API-method using C++(boost/python.hpp) + Python. (15.06)
-
+  - System statistics.
+    * Figure out how to get info:
+      - RAM usage.
+      - Disk usage.
+      - Disk usage.
+    * Plug in API.
 ## Completed(Client):
 ...
 
