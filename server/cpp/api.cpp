@@ -61,12 +61,39 @@ namespace AJ{
         }
         return result;
     }
+
+    API::RCON::RCON(){
+        /*
+        std::cout << "Test\n";
+        long long i = 0;
+        std::cout << "Test0\n";
+        client = std::move(std::make_unique<srcon>("127.0.0.1", 25575, "1337228"));
+        std::cout << "Test1\n";
+        while(!client->is_connected() && i < 100){
+            std::cout << "Connection failed, trying again...\n";
+            std::cout << "Test0\n";
+            client = std::move(std::make_unique<srcon>("127.0.0.1", 25575, "1337228"));
+            i++;
+            std::cout << "Test1\n";
+        }
+        std::cout << "Test2\n";
+        if(!client->is_connected()){
+            std::cout << "RCON initialization failed. RCON API won't work.\n";
+        }else{
+            std::cout << "Connected successfully!\n";
+            client->send("say It's WORKING!");
+            std::cout << client->send("say hello") << " <- response on \"" << "say hello" << "\"\n";
+        }
+        std::cout << "Test3\n";
+        */
+    }
+
     char const* API::RCON::exec_command(std::string cmd){
         return "1234";
     }
-    char const* API::RCON::get_history(int count, int offset){
+    /*char const* API::RCON::get_history(int count, int offset){
         return "1234";
-    }
+    }*/
     char const* API::BackupManagement::make(std::string name, std::string desc){
         return "1234";
     }

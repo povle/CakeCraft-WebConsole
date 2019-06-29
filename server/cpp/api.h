@@ -32,8 +32,9 @@ namespace AJ{
         };
         class RCON{
         public:
+            RCON();
             char const* exec_command(std::string cmd);
-            char const* get_history(int count, int offset);
+            //char const* get_history(int count, int offset);
         };
         class BackupManagement{
         public:

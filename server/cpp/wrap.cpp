@@ -12,7 +12,7 @@ BOOST_PYTHON_MODULE(api_cpp)
         ;
     class_<AJ::API::RCON>("rcon")
         .def("exec_command", &AJ::API::RCON::exec_command)
-        .def("get_history", &AJ::API::RCON::get_history)
+        //.def("get_history", &AJ::API::RCON::get_history)
         ;
     class_<AJ::API::BackupManagement>("backup")
         .def("make", &AJ::API::BackupManagement::make)

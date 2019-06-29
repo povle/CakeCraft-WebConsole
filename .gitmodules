@@ -1,3 +1,0 @@
-[submodule "server/cpp/rcon"]
-	path = server/cpp/rcon
-	url = https://github.com/Phil25/SourceRCON.git
