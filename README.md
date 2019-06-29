@@ -43,11 +43,13 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
   * Create API-request class. (9.06)
   * Make simple API-method using C++(boost/python.hpp) + Python. (15.06)
   - System statistics.
-    * Figure out how to get info:
+    * Figure out how to get info: (28.06)
       - RAM usage.
       - Disk usage.
       - Disk usage.
-    * Plug in API.
+    * Plug in API. (28.06)
+- RCON.
+  * Figure out how to get console history. (29.06)
 ## Completed(Client):
 ...
 
@@ -94,7 +96,7 @@ To call methods use: `https://IP:port/method/METHOD_NAME?secret=SECRET_KEY&arg1=
 
 
 
-### **rcon.exec_command**: executes command on the server. Also returns console response. Arguments:
+### **rcon.exec_command**: executes command on the server. Returns console response. Arguments:
 
 | # | argument | description |
 |--:|:--------:|-------------|
@@ -104,10 +106,7 @@ To call methods use: `https://IP:port/method/METHOD_NAME?secret=SECRET_KEY&arg1=
 
 | # | argument | description |
 |--:|:--------:|-------------|
-|  1| count | Amount of lines to return, if 0 - whole history |
-|  2| offset | Offset from last line, 0 by default |
-
-
+|  1| offset | Offset from first character, 0 by default |
 
 ### **backup.make**: makes a backup of the important files. Arguments:
 

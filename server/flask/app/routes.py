@@ -174,6 +174,7 @@ class API:
 
         # FIXME
         class RCON:
+            # FIXME
             @app.route("/method/rcon.exec_command", methods=['GET', 'POST'])
             def exec_command():
 
@@ -231,7 +232,6 @@ class API:
                     }
                 })
 
-            # FIXME
             @app.route("/method/rcon.get_history", methods=['GET', 'POST'])
             def get_history():
 
@@ -249,22 +249,13 @@ class API:
                             "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
                         }
                     })
-                # FIXME
-                # Temporary part to allow web-developer do his job:
-                try:
-                    console_history = open("temp_console_history.json", "r")
-                    history = json.load(console_history)["msg"]
-                    console_history.close()
-                except IOError:
-                    history = {"msg":[]}
-                except:
-                    raise
-                # End of temporary part
-                history.sort(key=lambda x: x["timestamp"])
+                offset = "0" if "offset" not in request.args else request.args["offset"]
                 log.write("/method/rcon.get_history: successful request")
+                history = api_cpp.rcon.get_history(offset)
                 return json.dumps({
                     "response":{
-                        "history": history
+                        "history": history[0],
+                        "chars": history[1]
                     }
                 })
 
