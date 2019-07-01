@@ -1,22 +1,18 @@
-$(document).foundation()
+$(document).foundation();
 
 var autoRefreshIsOn = false;
 
-document.getElementsByName("serverStart")[0].addEventListener('click', serverStart);
-document.getElementsByName("serverStop")[0].addEventListener('click', serverStop);
-document.getElementsByName("statsRefresh")[0].addEventListener('click', statsRefresh);
-document.getElementsByName("autoRefreshEnabled")[0].addEventListener('input', autoRefreshEnabled);
-var autoRefreshRate = document.getElementsByName("autoRefreshRate")[0];
-var autoRefreshRateSlider = document.getElementsByName("autoRefreshRateSlider")[0];
-autoRefreshRate.addEventListener('input', autoRefreshRate);
-var lastAutoRefreshTimer;
+//TODO(bumbo): mark it in HTML
+document.getElementById("serverStart").addEventListener('click', serverStart);
+document.getElementById("serverStop").addEventListener('click', serverStop);
+document.getElementById("statsRefresh").addEventListener('click', statsRefresh);
 
-var cpuLabel = document.getElementsByName("cpuLabel")[0];
-var ramLabel = document.getElementsByName("ramLabel")[0];
-var diskLabel = document.getElementsByName("discLabel")[0];
-var cpuProgress = document.getElementsByName("cpuProgress")[0];
-var ramProgress = document.getElementsByName("ramProgress")[0];
-var diskProgress = document.getElementsByName("diskProgress")[0];
+var cpuLabel = document.getElementById("cpuLabel");
+var ramLabel = document.getElementById("ramLabel");
+var diskLabel = document.getElementById("discLabel");
+var cpuProgress = document.getElementById("cpuProgress");
+var ramProgress = document.getElementById("ramProgress");
+var diskProgress = document.getElementById("diskProgress");
 
 var cpuUsed = 75;
 var ramUsed = 5;
@@ -52,7 +48,7 @@ function statsRefresh() {
 	if (cpuUsed > 100) cpuUsed = 0;
 	if (ramUsed > 100) ramUsed = 0;
 	
-	var ramUsageResponce = httpGet(baseAddress + "stats.get_ram_usage?secret=" + key_secret + "&format=percent");
+	//var ramUsageResponce = httpGet(baseAddress + "stats.get_ram_usage?secret=" + key_secret + "&format=percent");
 
 	cpuLabel.innerHTML = 'CPU (' + cpuUsed + '%)';
 	ramLabel.innerHTML = 'RAM (' + ramUsed + '%)';
@@ -60,22 +56,4 @@ function statsRefresh() {
 	cpuProgress.setAttribute("style", "width:" + cpuUsed + "%");
 	ramProgress.setAttribute("style", "width:" + ramUsed + "%");
 	diskProgress.setAttribute("style", "width:" + spaceUsed + "%");
-}
-
-function autoRefreshEnabled() {
-	if (autoRefreshIsOn) {
-		clearInterval(lastAutoRefreshTimer);
-		autoRefreshRate.setAttribute("disabled", "");
-		autoRefreshRateSlider.classList.add("disabled");
-	} else {
-		lastAutoRefreshTimer = setInterval(statsRefresh, autoRefreshRate.value);
-		autoRefreshRate.removeAttribute("disabled");
-		autoRefreshRateSlider.classList.remove("disabled");
-	}
-	autoRefreshIsOn = !autoRefreshIsOn;
-}
-
-function autoRefreshRate() {
-	clearInterval(lastAutoRefreshTimer);
-	lastAutoRefreshTimer = setInterval(statsRefresh, autoRefreshRate.value);
 }

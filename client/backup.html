@@ -1,4 +1,4 @@
-﻿<!--TODO(bumbo):
+<!--TODO(bumbo):
 	- Custom ui design (using jquery)!
 -->
 
@@ -44,29 +44,25 @@
 					</div>
 				</div>
 
-				<div style="margin-bottom:20px"></div>
-				<button type="button" class="success button" id="serverStart">Server Start</button>
-				<button type="button" class="alert button" id="serverStop">Server Stop</button>
-				<h4>System stats:</h4>
-				<div style="margin-bottom:20px"></div>
+				<h4>Backup list:</h4>
+				<button class="button primary" onclick="updateBackupList">Update List</button>
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Backup Name</th>
+							<th>Date</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="backupList">
+					</tbody>
+				</table>
 
-				<!--PROGRESS BARS-->
-				<h6 id="cpuLabel">CPU (25%)</h6>
-				<div class="primary progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-					<div class="progress-meter" id="cpuProgress" style="width: 25%"></div>
-				</div>
+				<hr />
 
-				<h6 id="ramLabel">RAM (60%)</h6>
-				<div class="warning progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-					<div class="progress-meter" id="ramProgress" style="width: 60%"></div>
-				</div>
-
-				<h6 id="discLabel">Disk space used (2%)</h6>
-				<div class="success progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-					<div class="progress-meter" id="diskProgress" style="width: 2%"></div>
-				</div>
-				<div style="margin-bottom:30px"></div>
-				<button type="button" class="button" id="statsRefresh">Refresh stats</button>
+				<button class="button primary">Backup!</button>
 			</div>
 
 		</div>
@@ -75,6 +71,6 @@
 	<script src="js/vendor/jquery.js"></script>
 	<script src="js/vendor/what-input.js"></script>
 	<script src="js/vendor/foundation.js"></script>
-	<script src="js/app.js"></script>
+	<script src="js/backup.js"></script>
 </body>
 </html>
