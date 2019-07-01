@@ -1,3 +1,5 @@
+$(document).foundation();
+
 var commandText = document.getElementById("commandText");
 var textField = document.getElementById("commandTextField");
 //TODO(bumbo): redraw canvas on widow resize!
