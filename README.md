@@ -3,9 +3,7 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 
 ## Goals to complete(Server):
 - Backups.
-  * Make auto-backup system.
-  * Make check hash on backup.info method, so you'll know if backup is modified.
-  * Make search by hash or timestamp.
+  * Make search by name or timestamp.
   * Plug in API.
 - Server manipulations.
   * Figure out how to run server remotely.
@@ -34,8 +32,14 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
   * Figure out how to get console history. (29.06)
   * Make system to send commands to minecraft server. (02.07)
   * Plug in API. (02.07)
+- Backups.
+  * Make backup method. (02.07)
+  * Make auto-backup system. (02.07)
 ## Completed(Client):
 ...
+
+## TO DO(Server):
+- Make single URI handler like here http://flask.pocoo.org/docs/1.0/quickstart/.
 
 ## Setting up:
 - At first, configure server:
@@ -121,5 +125,6 @@ To call methods use: `https://IP:port/method/METHOD_NAME?secret=SECRET_KEY&arg1=
 |--:|:--------:|-------------|
 |  1| backup | Timestamp of backup, cannot be used with *backup_name* |
 |  2| backup_name | The beginning of name or full name of backup, cannot be used with *backup* |
+|  3| force | If true then force switch else default switch with warnings |
 
 **WARNING: stop the server before it.**

@@ -17,7 +17,8 @@ class ConfigFile:
             secret.update(str(random.randint(1000000, 999999999)).encode())
             self.config = {
                 "secret_key": secret.hexdigest().upper(),
-                "rcon_key": ""
+                "rcon_key": "",
+                "backup_interval": 15 * 60
             }
             json.dump(self.config, config_file)
 
@@ -36,4 +37,5 @@ class Config(object):
     RCON_KEY = config_file.get("rcon_key")
     RCON_HOST = "127.0.0.1"
     RCON_PORT = 25575
+    BACKUP_INTERVAL = config_file.get("backup_interval")
     LOG_FILE = time.strftime("logs/%d.%m.%y.log", time.gmtime())

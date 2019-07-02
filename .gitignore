@@ -8,6 +8,7 @@ __pycache__
 
 # Minecraft server is almost only binaries:
 /server/minecraft/
+/server/minecraft-backups/
 
 # User-data files and virtual environment which contains almost only binaries:
 /server/flask/logs

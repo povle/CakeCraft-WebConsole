@@ -11,13 +11,13 @@ BOOST_PYTHON_MODULE(api_cpp)
         .def("get_disk_usage", &AJ::API::Stats::get_disk_usage)
         ;
     class_<AJ::API::RCON>("rcon")
-        .def("exec_command", &AJ::API::RCON::exec_command)
+        //.def("exec_command", &AJ::API::RCON::exec_command)
         //.def("get_history", &AJ::API::RCON::get_history)
         ;
     class_<AJ::API::BackupManagement>("backup")
-        .def("make", &AJ::API::BackupManagement::make)
-        .def("info", &AJ::API::BackupManagement::info)
-        .def("list", &AJ::API::BackupManagement::list)
-        .def("switch_to", &AJ::API::BackupManagement::switch_to)
+        //.def("make", &AJ::API::BackupManagement::make)
+        //.def("info", &AJ::API::BackupManagement::info)
+        //.def("list", &AJ::API::BackupManagement::list)
+        //.def("switch_to", &AJ::API::BackupManagement::switch_to)
         ;
 }

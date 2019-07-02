@@ -155,9 +155,7 @@ class API:
                     }
                 })
 
-        # FIXME
         class RCON:
-            # FIXME
             @app.route("/method/rcon.exec_command", methods=['GET', 'POST'])
             def exec_command():
 
@@ -183,14 +181,24 @@ class API:
                         }
                     })
                 command = request.args["command"]
-                console_response = api_cpp.rcon.exec_command(command)
-                log.write("/method/rcon.exec_command: successful request, successful command execution")
-                return json.dumps({
-                    "response":{
-                        "command": command,
-                        "console_response": console_response
-                    }
-                })
+                try:
+                    console_response = api_cpp.rcon.exec_command(command)
+                except Exception as e:
+                    log.write("/method/rcon.exec_command: request failed, caught error: " + str(e))
+                    return json.dumps({
+                        "bad_response":{
+                            "command": command,
+                            "error": str(e)
+                        }
+                    })
+                else:
+                    log.write("/method/rcon.exec_command: successful request, successful command execution")
+                    return json.dumps({
+                        "response":{
+                            "command": command,
+                            "console_response": console_response
+                        }
+                    })
 
             @app.route("/method/rcon.get_history", methods=['GET', 'POST'])
             def get_history():
