@@ -4,23 +4,6 @@ from flask import request
 import os, json, time
 import API as api_cpp
 
-"""
-@app.route('/')
-@app.route('/index')
-def index():
-    f = open("/app/index.html")
-    page = f.read()
-    f.close()
-    return page
-
-@app.route("/method/new")
-def new_method():
-    r = ""
-    for i in range(1, 11):
-        r += str(i) + "\t" + str(i*i) + "<br/>"
-    return r
-"""
-
 def check_secret(secret):
     if secret == app.config["SECRET_KEY"]:
         return True # Secret is right
@@ -200,30 +183,7 @@ class API:
                         }
                     })
                 command = request.args["command"]
-                # FIXME
-                # Temporary part to allow web-developer do his job:
-                console_response = "Unrecognized command \"" + command.split()[0] + "\".\n"
-                try:
-                    console_history = open("temp_console_history.json", "r")
-                    history = json.load(console_history)
-                    console_history.close()
-                except IOError:
-                    history = {"msg":[]}
-                except:
-                    raise
-                history["msg"].append({
-                    "type":"command",
-                    "timestamp": time.time(),
-                    "command":command,
-                    "console_response":console_response
-                })
-                try:
-                    console_history = open("temp_console_history.json", "w")
-                    json.dump(history, console_history, indent=4)
-                    console_history.close()
-                except:
-                    raise
-                # End of temporary part
+                console_response = api_cpp.rcon.exec_command(command)
                 log.write("/method/rcon.exec_command: successful request, successful command execution")
                 return json.dumps({
                     "response":{

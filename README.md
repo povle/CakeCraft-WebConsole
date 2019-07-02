@@ -50,6 +50,8 @@ Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
     * Plug in API. (28.06)
 - RCON.
   * Figure out how to get console history. (29.06)
+  * Make system to send commands to minecraft server. (02.07)
+  * Plug in API. (02.07)
 ## Completed(Client):
 ...
 
