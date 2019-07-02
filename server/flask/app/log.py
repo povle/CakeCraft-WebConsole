@@ -8,9 +8,8 @@ def write(message):
     except:
         raise
     message = time.strftime("[%H:%M:%S] ", time.gmtime()) + message
-    print("")
     print(message)
-    print("")
+    print()
     log_file.write(message)
     log_file.write("\n")
     log_file.close()
