@@ -28,5 +28,8 @@ python3.7 -m venv venv
 source venv/bin/activate
 sudo apt install python3-pip
 pip3 install Flask
+pip3 install wheel
+pip3 install mcrcon
+pip3 install apscheduler
 python3.7 -m flask --version
 deactivate
