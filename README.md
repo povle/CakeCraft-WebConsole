@@ -2,28 +2,10 @@
 Project for Spiralio's minecraft server "CakeCraft SMP Season 2"
 
 ## Goals to complete(Server):
-- HTTP Python API server on Flask. (COMPLETED)
-  * Create server with one html page.
-  * Figure out how to get POST or GET data.
-  * Make simple HTTP-request system.
-  * Create secret key protection.
-- API Base.
-  * Create API-request class. (COMPLETED)
-  * Make simple API-method using C++(boost/python.hpp) + Python.
 - Backups.
   * Make auto-backup system.
   * Make check hash on backup.info method, so you'll know if backup is modified.
   * Make search by hash or timestamp.
-  * Plug in API.
-- RCON.
-  * Make system to send commands to minecraft server.
-  * Figure out how to get console history.
-  * Plug in API.
-- System statistics.
-  * Figure out how to get info:
-    - RAM usage.
-    - CPU usage.
-    - Disk usage.
   * Plug in API.
 - Server manipulations.
   * Figure out how to run server remotely.
