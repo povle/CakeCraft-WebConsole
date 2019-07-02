@@ -7,7 +7,7 @@ def write(message):
         log_file = open(app.config["LOG_FILE"], "a")
     except:
         raise
-    message = time.strftime(" [%H:%M:%S] ", time.gmtime()) + message
+    message = time.strftime("[%H:%M:%S] ", time.gmtime()) + message
     print("")
     print(message)
     print("")
