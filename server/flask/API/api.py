@@ -40,7 +40,7 @@ class Backup(api_cpp.backup):
     @staticmethod
     def make(name = None, desc = None):
         if name == None:
-            name = time.strftime("backup_%H:%M:%S:.%d.%m.%y", time.gmtime())
+            name = time.strftime("backup_%H:%M:%S.%d.%m.%y", time.gmtime())
         if desc == None:
             desc = ""
         # FIXME: {

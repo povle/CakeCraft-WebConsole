@@ -231,12 +231,44 @@ class API:
         class BackupManagement:
             @app.route("/method/backup.make", methods=['GET', 'POST'])
             def make():
-                log.write("/method/backup.make: API method does not work, W.I.P.")
-                return json.dumps({
-                    "bad_response":{
-                        "error": "API method W.I.P."
-                    }
-                })
+                if "secret" not in request.args:
+                    log.write("/method/backup.make: access denied, expected secret")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, expected secret"
+                        }
+                    })
+                if not check_secret(request.args["secret"]):
+                    log.write("/method/backup.make: access denied, wrong secret value: \"" + request.args["secret"] + "\"")
+                    return json.dumps({
+                        "bad_response":{
+                            "error": "access denied, wrong secret value: \"" + request.args["secret"] + "\""
+                        }
+                    })
+                if "name" not in request.args:
+                    name = None
+                else:
+                    name = request.args["name"]
+                if "desc" not in request.args:
+                    description = None
+                else:
+                    description = request.args["desc"]
+                try:
+                    backup = api_cpp.backup.make(name, description)
+                except Exception as e:
+                    log.write("/method/rcon.exec_command: request failed, caught error: " + str(e))
+                    return json.dumps({
+                        "bad_response":{
+                            "error": str(e)
+                        }
+                    })
+                else:
+                    log.write("/method/rcon.exec_command: successful request, successful command execution")
+                    return json.dumps({
+                        "response":{
+                            "backup": backup
+                        }
+                    })
 
             @app.route("/method/backup.info", methods=['GET', 'POST'])
             def info():
