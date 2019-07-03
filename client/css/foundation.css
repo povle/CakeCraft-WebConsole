@@ -2716,6 +2716,7 @@ a.button:hover, a.button:focus {
 
 [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'],
 textarea {
+	resize: vertical;
   display: block;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -2757,11 +2758,11 @@ textarea {
   textarea[rows] {
     height: auto; }
 
-input:disabled, input[readonly],
-textarea:disabled,
-textarea[readonly] {
-  background-color: #e6e6e6;
-  cursor: not-allowed; }
+	input:disabled, input[readonly],
+	textarea[readonly] {
+		background-color: #e6e6e6;
+		cursor: text;
+	}
 
 [type='submit'],
 [type='button'] {
