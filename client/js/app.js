@@ -9,12 +9,8 @@ var cpuProgress = document.getElementById("cpuProgress");
 var ramProgress = document.getElementById("ramProgress");
 var diskProgress = document.getElementById("diskProgress");
 
-var cpuUsed = 75;
-var ramUsed = 5;
-var spaceUsed = 95;
-
 var baseAddress = "https://IP:port/method/";
-//TODO(bumbo): having secret key right here, in js might be not a good idea!
+//TODO: having secret key right here, in js might be not a good idea!
 var key_secret = "123";
 var xhttp = new XMLHttpRequest();
 
@@ -26,18 +22,23 @@ function httpGet(theUrl) {
 }
 
 function serverStart() {
-	//TODO(bumbo): use API to start the server
+	//TODO: use API to start the server
 }
 
 function serverStop() {
-	//TODO(bumbo): use API to stop the server
+	//TODO: use API to stop the server
 }
 
 function statsRefresh() {
-	//TODO(bumbo): use API to get the values
+	//TODO: use API to get the values
 
 	//var ramUsageResponce = httpGet(baseAddress + "stats.get_ram_usage?secret=" + key_secret + "&format=percent");
 
+	var ramUsed;
+	var cpuUsed
+	var spaceUsed;
+
+	//TODO(bumbo): change progress bar attributes depending on ramUsed, cpuUsed, spaceUsed values.
 	cpuLabel.innerHTML = 'CPU (' + cpuUsed + '%)';
 	ramLabel.innerHTML = 'RAM (' + ramUsed + '%)';
 	diskLabel.innerHTML = 'Disk space used (' + spaceUsed + '%)';
