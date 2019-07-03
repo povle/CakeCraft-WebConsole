@@ -8,8 +8,6 @@ commandText.style.width = textField.offsetWidth + "px";
 commandText.height = 500;
 commandText.style.height = "500px";
 
-textField.addEventListener('keydown', commandEnter);
-
 function sendCommand(command) {
 	//TODO(bumbo): send the command to the server
 }
