@@ -46,3 +46,93 @@ function statsRefresh() {
 	ramProgress.setAttribute("style", "width:" + ramUsed + "%");
 	diskProgress.setAttribute("style", "width:" + spaceUsed + "%");
 }
+
+function getValue(id) {
+	return document.getElementById(id);
+}
+
+function getRadioValue(id) {
+	var btns = document.getElementsById(id).value;
+	for (var i = 0; i < btns.length; i++) {
+		if (btns[i].checked) return btns[i].value;
+	}
+	return "";
+}
+
+function onSave() {
+	document.getElementById("savedWindow").style.display = "block";
+}
+
+function playerSubmit() {
+	var maxPlayers = getValue("max-players");
+	var playerIdleTimeout = getValue("player-idle-timeout");
+}
+
+function serverSubmit() {
+	var serverPort = getValue("server-port");
+	var enableCommandBlock = getRadioValue("enable-command-block");
+	var maxTickTime = getValue("max-tick-time");
+	var allowFlight = getRadioValue("allow-flight");
+	var opPermissionLevel = getValue("op-permission-level");
+	var enableWhitelist = getRadioValue("enable-whitelist");
+	var enforceWhitelist = getRadioValue("enforce-whitelist");
+	var broadcastConsoleToOps = getRadioValue("broadcast-console-to-ops");
+	var snooperEnable = getRadioValue("snooper-enabled");
+	var useNativeTransport = getRadioValue("native-transport");
+	var preventProxyConnections = getRadioValue("prevent-proxy-connections");
+	var onlineMode = getValue("online-mode");
+	var motd = getValue = getValue("motd");
+
+	//...//
+
+	onSave();
+}
+
+function RCONSubmit() {
+	var enableRCON = getRadioValue("enable-rcon");
+	var broadcastRCONToOps = getRadioValue("broadcast-rcon-to-ops");
+	var RCONPort = getValue("rcon-port");
+	var RCONPassword = getValue("rcon-password");
+
+	//...//
+
+	onSave();
+
+}
+
+function gameplaySubmit() {
+	var difficulty = getRadioValue("difficulty");
+	var pvp = getRadioValue("pvp");
+	var forceGamemode = getRadioValue("force-gamemode");
+	var gamemode = getRadioValue("gamemode");
+	var hardcore = getRadioValue("hardcore");
+	var allowNether = getRadioValue("allow-nether");
+
+	//...//
+
+	onSave();
+
+}
+
+function spawnSubmit() {
+	var spawnProtection = getValue("spawn-protection");
+	var spawnAnimals = getValue("spawn-animals");
+	var spawnNPCs = getRadioValue("spawn-npcs");
+	var spawnMonsters = getRadioValue("spawn-monsters");
+
+	//...//
+
+	onSave();
+
+}
+
+function worldSubmit() {
+	var viewDistance = getValue("view-distance");
+	var maxWorldSize = getValue("max-world-size");
+	var maxBuildHeight = getValue("max-build-height");
+
+	//...//
+
+	onSave();
+
+}

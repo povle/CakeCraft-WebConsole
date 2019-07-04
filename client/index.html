@@ -66,243 +66,260 @@
 				<div style="margin-bottom:30px"></div>
 				<button type="button" class="hollow primary button" onclick="statsRefresh">Refresh stats</button>
 				<hr />
-				<h3>Server configuration:</h3>
+
+				<h3>Configurate:</h3>
 				<div style="margin-bottom:20px"></div>
 
+				<div class="success callout" data-closable="slide-out-right" id="savedWindow" style="display:none;">
+					<p>The changes are successfully saved!</p>
+					<button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<ul class="tabs" data-tabs id="example-tabs" >
+					<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Players</a></li>
+					<li class="tabs-title"><a href="#panel2">Server</a></li>
+					<li class="tabs-title"><a href="#panel3">RCON</a></li>
+					<li class="tabs-title"><a href="#panel4">Gameplay</a></li>
+					<li class="tabs-title"><a href="#panel5">Spawn</a></li>
+					<li class="tabs-title"><a href="#panel6">World</a></li>
+					<li class="tabs-title"><a href="#panel7">API</a></li>
+				</ul>
+
 				<!--TODO(bumbo): replace TRUE/FALSE fieldsets with switches!-->
-				<form>
-					<!-------------PLAYERS------------->
-					<h4>Players</h4>
-					<!------------!PLAYERS!------------>
+				<div class="tabs-content" data-tabs-content="example-tabs" style="min-height:1000px">
+					<div class="tabs-panel is-active" id="panel1">
+						<!-------------PLAYERS------------->
+						<label>Max players<input id="max-players" type="number" value="20" /></label>
+						<p class="help-text" id="max-players">The maximum number of players that can play on the server at the same time.</p>
 
-					<label>Max players<input id="max-players" type="number" value="20" /></label>
-					<p class="help-text" id="spawn-protection">The maximum number of players that can play on the server at the same time.</p>
+						<label>Player idle timeout<input id="player-idle-timeout" type="number" value="0" /></label>
+						<p class="help-text" id="player-idle-timeout">If non-zero players will be kicked for being idle for that many minutes.</p>
 
-					<label>Player idle timeout<input id="player-idle-timeout" type="number" value="0" /></label>
-					<p class="help-text" id="spawn-protection">If non-zero players will be kicked for being idle for that many minutes.</p>
+						<button onclick="playersSubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel2">
+						<!-------------SERVER------------->
+						<label>Server port<input id="server-port" type="number" value="25565" /></label>
+						<p class="help-text" id="server-port">Changes the port the server is hosting on.</p>
 
-					<!-------------SERVER------------->
-					<h4>Server</h4>
-					<!------------!SERVER!------------>
+						<fieldset class="large-5 cell">
+							<legend>Enable command block</legend>
+							<input type="radio" name="enable-command-block" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="enable-command-block" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="max-tick-time">Enables command blocks</p>
 
-					<label>Server port<input id="server-port" type="number" value="25565" /></label>
-					<p class="help-text" id="spawn-protection">Changes the port the server is hosting on.</p>
+						<label>Max tick time<input id="max-tick-time" type="number" value="60000" /></label>
+						<p class="help-text" id="max-tick-time">The maximum number of milliseconds a single tick may take before the server watchdog stops the server</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Enable command block</legend>
-						<input type="radio" name="enable-command-block" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="enable-command-block" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Enables command blocks</p>
+						<fieldset class="large-5 cell">
+							<legend>Allow flight</legend>
+							<input type="radio" name="allow-flight" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="allow-flight" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="max-tick-time">Allows users to use flight on your server while in Survival mode. (bumbo: enabling can lead to jump-sleeping bug)</p>
 
-					<label>Max tick time<input id="max-tick-time" type="number" value="60000" /></label>
-					<p class="help-text" id="max-tick-time">The maximum number of milliseconds a single tick may take before the server watchdog stops the server</p>
+						<label>Op permission level<input id="op-permission-level" type="number" value="4" /></label>
+						<p class="help-text" id="op-permission-level">Sets the default permission level for ops when using /op command.</p>
+						<fieldset class="large-5 cell">
+							<legend>Enable whitelist</legend>
+							<input type="radio" name="enable-whitelist" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="enable-whitelist" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="enable-whitelist">Players that are not in whitelist cannot log into the server.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Allow flight</legend>
-						<input type="radio" name="allow-flight" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="allow-flight" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Allows users to use flight on your server while in Survival mode. (bumbo: enabling can lead to jump-sleeping bug)</p>
+						<fieldset class="large-5 cell">
+							<legend>Enforce whitelist</legend>
+							<input type="radio" name="enforce-whitelist" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="enforce-whitelist" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="enforce-whitelist">Determines whether players who are not present in the whitelist will be kicked or not.</p>
 
-					<label>Op permission level<input id="op-permission-level" type="number" value="4" /></label>
-					<p class="help-text" id="spawn-protection">Sets the default permission level for ops when using /op command.</p>
-					<fieldset class="large-5 cell">
-						<legend>Enable whitelist</legend>
-						<input type="radio" name="enable-whitelist" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="enable-whitelist" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="enable-whitelist">Players that are not in whitelist cannot log into the server.</p>
+						<fieldset class="large-5 cell">
+							<legend>Broadcast console to ops</legend>
+							<input type="radio" name="broadcast-console-to-ops" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="broadcast-console-to-ops" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="broadcast-console-to-ops">Whether to broadcast console to ops*</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Enforce whitelist</legend>
-						<input type="radio" name="enforce-whitelist" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="enforce-whitelist" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Determines whether players who are not present in the whitelist will be kicked or not.</p>
+						<fieldset class="large-5 cell">
+							<legend>Snooper Enabled</legend>
+							<input type="radio" name="snooper-enabled" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="snooper-enabled" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="snooper-enabled">Enable snooper that sends data to http://snoop.minecraft.net.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Broadcast console to ops</legend>
-						<input type="radio" name="broadcast-console-to-ops" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="broadcast-console-to-ops" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Whether to broadcast console to ops*</p>
+						<fieldset class="large-5 cell">
+							<legend>Use native transport</legend>
+							<input type="radio" name="native-transport" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="native-transport" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="native-transport">Enable linux server optimizations.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Snooper Enabled</legend>
-						<input type="radio" name="snooper-enabled" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="snooper-enabled" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Enable snooper that sends data to http://snoop.minecraft.net.</p>
+						<fieldset class="large-5 cell">
+							<legend>Prevent proxy connections</legend>
+							<input type="radio" name="prevent-proxy-connections" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="prevent-proxy-connections" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="prevent-proxy-connections">If player uses proxy connection, he is kicked.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Use native transport</legend>
-						<input type="radio" name="native-transport" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="native-transport" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Enable linux server optimizations.</p>
+						<fieldset class="large-5 cell">
+							<legend>Online mode</legend>
+							<input type="radio" name="online-mode" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="online-mode" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="online-mode">Server checks connecting players against Minecraft accound database.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Prevent proxy connections</legend>
-						<input type="radio" name="prevent-proxy-connections" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="prevent-proxy-connections" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">If player uses proxy connection, he is kicked.</p>
+						<label>Motd<input id="motd" type="text" value="A Minecraft Server" /></label>
 
-					<label>Motd<input id="motd" type="text" value="A Minecraft Server" /></label>
+						<button onclick="serverSubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel3">
+						<!-------------RCON------------->
+						<fieldset class="large-5 cell">
+							<legend>Enable rcon</legend>
+							<input type="radio" name="enable-rcon" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="enable-rcon" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="enable-rcon">Enables remote access to server console</p>
 
-					<!-------------RCON------------->
-					<h4>RCON</h4>
-					<!------------!RCON!------------>
+						<fieldset class="large-5 cell">
+							<legend>Broadcast rcon to ops</legend>
+							<input type="radio" name="broadcast-rcon-to-ops" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="broadcast-rcon-to-ops" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="broadcast-rcon-to-ops">Whether to broadcast rcon to ops*</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Enable rcon</legend>
-						<input type="radio" name="enable-rcon" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="enable-rcon" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Enables remote access to server console</p>
+						<label>RCON port<input id="rcon-port" type="number" value="25575" /></label>
+						<p class="help-text" id="rcon-port">Sets the port to RCON.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Broadcast rcon to ops</legend>
-						<input type="radio" name="broadcast-rcon-to-ops" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="broadcast-rcon-to-ops" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Whether to broadcast rcon to ops*</p>
+						<label>RCON password<input id="rcon-password" type="password" value="" /></label>
+						<p class="help-text" id="rcon-password">Sets the password to RCON.</p>
 
-					<label>RCON port<input id="rcon-port" type="number" value="25575" /></label>
-					<p class="help-text" id="rcon-port">Sets the port to RCON.</p>
+						<button onclick="RCONSubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel4">
+						<!-------------GAMEPLAY------------->
+						<fieldset class="large-5 cell">
+							<legend>Difficulty</legend>
+							<input type="radio" name="difficulty" value="peaceful" id="peaceful"><label for="peaceful">Peaceful</label>
+							<input type="radio" name="difficulty" value="easy" id="easy" checked><label for="easy">Easy</label>
+							<input type="radio" name="difficulty" value="normal" id="normal"><label for="normal">Normal</label>
+							<input type="radio" name="difficulty" value="hard" id="hard"><label for="hard">Hard</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="difficulty">Defines the difficulty of the server.</p>
 
-					<label>RCON password<input id="rcon-password" type="password" value="" /></label>
-					<p class="help-text" id="rcon-password">Sets the password to RCON.</p>
+						<fieldset class="large-5 cell">
+							<legend>Enable PVP</legend>
+							<input type="radio" name="pvp" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="pvp" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="pvp">Enable PVP on the server.</p>
 
+						<fieldset class="large-5 cell">
+							<legend>Force gamemode</legend>
+							<input type="radio" name="force-gamemode" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="force-gamemode" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="force-gamemode">Force players to join the the default gamemode.</p>
 
-					<!-------------GAMEPLAY------------->
-					<h4>Gameplay</h4>
-					<!------------!GAMEPLAY!------------>
+						<fieldset class="large-5 cell">
+							<legend>Gamemode</legend>
+							<input type="radio" name="gamemode" value="survival" id="survival" checked><label for="survival">Survival</label>
+							<input type="radio" name="gamemode" value="creative" id="creative"><label for="creative">Creative</label>
+							<input type="radio" name="gamemode" value="adventure" id="adventure"><label for="adventure">Adventure</label>
+							<input type="radio" name="gamemode" value="spectator" id="spectator"><label for="spectator">Spectator</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="gamemode">Defines the mode of gameplay.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Difficulty</legend>
-						<input type="radio" name="difficulty" value="peaceful" id="peaceful"><label for="peaceful">Peaceful</label>
-						<input type="radio" name="difficulty" value="easy" id="easy" checked><label for="easy">Easy</label>
-						<input type="radio" name="difficulty" value="normal" id="normal"><label for="normal">Normal</label>
-						<input type="radio" name="difficulty" value="hard" id="hard"><label for="hard">Hard</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Defines the difficulty of the server.</p>
+						<fieldset class="large-5 cell">
+							<legend>Hardcore</legend>
+							<input type="radio" name="hardcore" value="true" id="v_true"><label for="v_true">True</label>
+							<input type="radio" name="hardcore" value="false" id="v_false" checked><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="hardcore">If true, difficulty is ignored and set to hard and player will be set to spectator mode if they die.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Enable PVP</legend>
-						<input type="radio" name="pvp" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="pvp" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Enable PVP on the server.</p>
+						<fieldset class="large-5 cell">
+							<legend>Allow nether</legend>
+							<input type="radio" name="allow-nether" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="allow-nether" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="allow-nether">Allows players travel to nether.</p>
+						<button onclick="gameplaySubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel5">
+						<!-------------SPAWN------------->
+						<fieldset class="large-5 cell">
+							<legend>Spawn NPCs</legend>
+							<input type="radio" name="spawn-npcs" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="spawn-npcs" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="spawn-npcs">Determines whether villagers will be spawned.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Force gamemode</legend>
-						<input type="radio" name="force-gamemode" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="force-gamemode" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Force players to join the the default gamemode.</p>
+						<fieldset class="large-5 cell">
+							<legend>Spawn monsters</legend>
+							<input type="radio" name="spawn-monsters" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="spawn-monsters" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="spawn-monsters">Determines if the monsters are going to be spawned.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Gamemode</legend>
-						<input type="radio" name="gamemode" value="survival" id="survival" checked><label for="survival">Survival</label>
-						<input type="radio" name="gamemode" value="creative" id="creative"><label for="creative">Creative</label>
-						<input type="radio" name="gamemode" value="adventure" id="adventure"><label for="adventure">Adventure</label>
-						<input type="radio" name="gamemode" value="spectator" id="spectator"><label for="spectator">Spectator</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Defines the mode of gameplay.</p>
+						<fieldset class="large-5 cell">
+							<legend>Spawn animals</legend>
+							<input type="radio" name="spawn-animals" value="true" id="v_true" checked><label for="v_true">True</label>
+							<input type="radio" name="spawn-animals" value="false" id="v_false"><label for="v_false">False</label>
+						</fieldset>
+						<div style="margin-bottom:10px"></div>
+						<p class="help-text" id="spawn-animals">Determines whether animals will be spawned on the server.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Hardcore</legend>
-						<input type="radio" name="hardcore" value="true" id="v_true"><label for="v_true">True</label>
-						<input type="radio" name="hardcore" value="false" id="v_false" checked><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">If true, difficulty is ignored and set to hard and player will be set to spectator mode if they die.</p>
+						<button onclick="spawnSubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel6">
+						<!-------------WORLD------------->
+						<label>Spawn protection<input id="spawn-protection" type="number" value="16" /></label>
+						<p class="help-text" id="spawn-protection">Determines the radius of the spawn protection.</p>
 
-					<!-------------SPAWN------------->
-					<h4>Spawn</h4>
-					<!------------!SPAWN!------------>
+						<label>View distance<input id="view-distance" type="number" value="10" /></label>
+						<p class="help-text" id="spawn-protection">Maximum amound of chunks that can be loaded by any player. (mojang: Value less than 9 causes MC-2536 bug.)</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Spawn NPCs</legend>
-						<input type="radio" name="spawn-npcs" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="spawn-npcs" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Determines whether villagers will be spawned.</p>
+						<label>Max world size<input id="max-world-size" type="number" value="29999984" /></label>
+						<p class="help-text" id="max-world-size">This sets the maximum possible size in blocks, expressed as a radius.</p>
 
-					<fieldset class="large-5 cell">
-						<legend>Spawn monsters</legend>
-						<input type="radio" name="spawn-monsters" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="spawn-monsters" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Determines if the monsters are going to be spawned.</p>
+						<label>Max build height<input id="max-build-height" type="number" value="256" /></label>
+						<p class="help-text" id="max-build-height">Maximum height at which building is alowed.</p>
 
-					<!-------------WORLD------------->
-					<h4>World</h4>
-					<!------------!WORLD!------------>
-					<fieldset class="large-5 cell">
-						<legend>Allow nether</legend>
-						<input type="radio" name="allow-nether" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="allow-nether" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Allows players travel to nether.</p>
+						<button onclick="worldSubmit" class="button hollow success">Save</button>
+					</div>
+					<div class="tabs-panel" id="panel7">
+						<!--TODO(bumbo): make API configuration form-->
+					</div>
 
-					<label>Spawn protection<input id="spawn-protection" type="number" value="16" /></label>
-					<p class="help-text" id="spawn-protection">Determines the radius of the spawn protection.</p>
-
-					<label>View distance<input id="view-distance" type="number" value="10" /></label>
-					<p class="help-text" id="spawn-protection">Maximum amound of chunks that can be loaded by any player. (mojang: Value less than 9 causes MC-2536 bug.)</p>
-					<fieldset class="large-5 cell">
-						<legend>Spawn animals</legend>
-						<input type="radio" name="spawn-animals" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="spawn-animals" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Determines whether animals will be spawned on the server.</p>
-
-					<label>Max world size<input id="max-players" type="number" value="29999984" /></label>
-					<p class="help-text" id="spawn-protection">This sets the maximum possible size in blocks, expressed as a radius.</p>
-
-					<label>Max build height<input id="max-build-height" type="number" value="256" /></label>
-					<p class="help-text" id="spawn-protection">Maximum height at which building is alowed.</p>
-					<fieldset class="large-5 cell">
-						<legend>Online mode</legend>
-						<input type="radio" name="online-mode" value="true" id="v_true" checked><label for="v_true">True</label>
-						<input type="radio" name="online-mode" value="false" id="v_false"><label for="v_false">False</label>
-					</fieldset>
-					<div style="margin-bottom:10px"></div>
-					<p class="help-text" id="max-tick-time">Server checks connecting players against Minecraft accound database.</p>
-
-				</form>
-
-				<button type="button" class="button hollow success" onclick="serverOptions">Save</button>
-
+				</div>
 			</div>
 
-		</div>
-	</div>
-
-	<script src="js/vendor/jquery.js"></script>
-	<script src="js/vendor/what-input.js"></script>
-	<script src="js/vendor/foundation.js"></script>
-	<script src="js/app.js"></script>
+			<script src="js/vendor/jquery.js"></script>
+			<script src="js/vendor/what-input.js"></script>
+			<script src="js/vendor/foundation.js"></script>
+			<script src="js/app.js"></script>
 </body>
 </html>
