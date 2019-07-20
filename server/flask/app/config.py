@@ -1,7 +1,5 @@
 #!python3.7
-import os, json, hashlib, random, time
-
-random.seed()
+import os, json, secrets, time
 
 class ConfigFile:
     def __init__(self):
@@ -13,10 +11,9 @@ class ConfigFile:
             config_file = open("config.json", "w")
 
             # config by default
-            secret = hashlib.sha1()
-            secret.update(str(random.randint(1000000, 999999999)).encode())
+            secret = secrets.token_hex(20)
             self.config = {
-                "secret_key": secret.hexdigest().upper(),
+                "secret_key": secret.upper(),
                 "rcon_key": "",
                 "backup_interval": 15 * 60
             }
